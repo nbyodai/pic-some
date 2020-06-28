@@ -33,6 +33,12 @@ function ContextProvider({ children }) {
     setCartItems((prevCartItems) => [...prevCartItems, img]);
   }
 
+  function removeCartItem(id) {
+    setCartItems((prevCartItems) =>
+      prevCartItems.filter((item) => item.id !== id)
+    );
+  }
+
   return (
     <Context.Provider
       value={{
@@ -41,6 +47,7 @@ function ContextProvider({ children }) {
         setAllPhotos,
         toggleFavorite,
         addCartItem,
+        removeCartItem,
       }}
     >
       {children}
