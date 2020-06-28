@@ -5,14 +5,17 @@ import { Context } from "../Context";
 
 function Image({ className, img }) {
   const [hovered, setHovered] = useState(false);
-  const { toggleFavorite } = useContext(Context);
+  const { toggleFavorite, addCartItem } = useContext(Context);
+
   const heartIcon = (hovered || img.isFavorite) && (
     <i
       onClick={() => toggleFavorite(img.id)}
       className={`ri-heart-${img.isFavorite ? "fill" : "line"} favorite`}
     ></i>
   );
-  const plusIcon = hovered && <i className="ri-add-circle-line cart"></i>;
+  const plusIcon = hovered && (
+    <i onClick={() => addCartItem(img)} className="ri-add-circle-line cart"></i>
+  );
   return (
     <div
       className={`${className} image-container`}
