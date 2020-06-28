@@ -6,6 +6,19 @@ function ContextProvider({ children }) {
   const url =
     "https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json";
 
+  function toggleFavorite(id) {
+    const modPhotos = allPhotos.map((photo) => {
+      if (photo.id === id) {
+        return {
+          ...photo,
+          isFavorite: !photo.isFavorite,
+        };
+      }
+      return photo;
+    });
+    setAllPhotos(modPhotos);
+  }
+
   useEffect(() => {
     fetch(url, {})
       .then((response) => response.json())
@@ -15,7 +28,7 @@ function ContextProvider({ children }) {
   }, []);
 
   return (
-    <Context.Provider value={{ allPhotos, setAllPhotos }}>
+    <Context.Provider value={{ allPhotos, setAllPhotos, toggleFavorite }}>
       {children}
     </Context.Provider>
   );
